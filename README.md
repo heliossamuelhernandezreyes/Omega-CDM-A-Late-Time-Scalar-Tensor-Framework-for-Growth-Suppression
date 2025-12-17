@@ -1,74 +1,82 @@
-# Omega-CDM
-### A Late-Time Scalar–Tensor Framework for Growth Suppression
+# Omega-CDM Framework (v1.1)
 
-[![Status](https://img.shields.io/badge/Status-Research_Letter-blue)](https://github.com/)
-[![Cosmology](https://img.shields.io/badge/Field-Late__Universe-purple)]()
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+![Status](https://img.shields.io/badge/Status-Calibrated_Numerical_Implementation-success)
+![Field](https://img.shields.io/badge/Field-Cosmology%20%7C%20Modified_Gravity-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## 🌌 Scientific Scope & Abstract
-
-**Omega-CDM** is a phenomenological scalar–tensor framework designed to explore controlled late-time deviations from General Relativity. The primary goal is to address current tensions in large-scale structure growth (notably the **$S_8$ tension**) while preserving consistency with background cosmology and **DESI 2024** observations.
-
-This repository provides:
-* A self-consistent modification of the effective gravitational coupling $G_{\mathrm{eff}}(a)$.
-* Numerical predictions for late-time observables such as $f\sigma_8(z)$.
-* A dynamically evolving dark energy equation of state $w(z)$.
-* Explicit control via a single coupling parameter $\beta$.
-
-> **Note:** This work is presented as a **theoretical proposal and numerical forecast**. It focuses on the phenomenology at $z \lesssim 2.5$.
+**A late-time scalar–tensor framework for controlled suppression of structure growth.**
 
 ---
 
-## 📊 Main Results (v1.0)
+## 📊 Visual Summary: Growth Suppression
 
-Based on the numerical implementation included in `Omega_solver.py`:
+![Omega-CDM v1.1 Growth Suppression](omega_v1p1_plot.png)
 
-1.  **Controlled Suppression:**
-    The model predicts a suppression of structure growth:
-    $$\Delta f\sigma_8(z=1) \simeq -4.8\% \quad (\text{for } \beta = 0.4)$$
-    This aligns with the requirements to alleviate the tension between Planck and weak lensing surveys (KiDS/DES).
-
-2.  **GR Recovery:**
-    The screening mechanism ensures strict recovery of General Relativity at $z=0$:
-    $$G_{\mathrm{eff}}(z=0) \approx 1.00$$
-
-3.  **Dynamic Dark Energy:**
-    The scalar field supports a phantom-crossing equation of state $w(z)$, consistent with recent DESI hints.
+**Figure 1 —** Prediction of the growth observable \( f\sigma_8(z) \) in **Omega-CDM (v1.1)** compared to standard **ΛCDM**.  
+The Omega-CDM model (blue, \( \beta = 0.25 \)) exhibits a controlled suppression at intermediate redshifts  
+\( 0.5 \lesssim z \lesssim 1.5 \), while recovering General Relativity at \( z = 0 \).
 
 ---
 
-## ⚙️ Model Parameters
+## 🔭 Scientific Scope
 
-The framework is controlled by the following effective parameters:
+**Omega-CDM** is a phenomenological scalar–tensor framework designed to explore **late-time deviations from General Relativity** with the explicit goal of alleviating the **\( S_8 \) tension** between CMB measurements (Planck) and large-scale structure probes (KiDS/DES/DESI).
 
-| Parameter | Symbol | Fiducial | Physical Role |
-| :--- | :---: | :---: | :--- |
-| **Disformal Coupling** | $\beta$ | `0.4` | Strength of the growth suppression (screening). |
-| **Kinetic Scale** | $\alpha$ | `1.0` | Normalization of the kinetic term. |
-| **Initial Velocity** | $\Omega'_0$ | `0.05` | Determines the redshift onset of the modification. |
+The framework is intentionally restricted to:
+- Linear perturbations  
+- Quasi-static regime  
+- Late cosmological times \( (z \lesssim 2.5) \)
 
----
-
-## ⚠️ Limitations & Future Work
-
-The current implementation focuses on **late-time phenomenology**. While numerically robust, the following components are scheduled for future development:
-
-* **Global Statistical Validation:** A full MCMC likelihood analysis against Planck, BAO, and SNIa data has not yet been performed in this repository.
-* **CMB Physics:** The impact on the full CMB angular power spectra ($C_\ell^{TT,TE}$) requires implementation in a Boltzmann solver (e.g., CLASS or CAMB).
-* **Early Universe:** The model currently assumes a standard $\Lambda$CDM behavior at high redshifts ($z \gg 100$).
-
-These limitations are consistent with the scope of a **Research Letter** or exploratory proposal.
+This repository is **not** a full Boltzmann-solver implementation, but a **calibrated numerical forecast** suitable for research-letter–level studies.
 
 ---
 
-## 📜 Citation
+## 📈 Main Results (v1.1 — Calibrated)
 
-If you use this code or framework in your research, please cite as:
+Based on the full second-order numerical integration implemented in `Omega_solver.py`:
 
-> **Helios Samuel**, *Omega-CDM Framework: Controlled Suppression of Structure Growth*, GitHub Repository, 2025.
+1. **Controlled Growth Suppression**  
+   \[
+   \Delta f\sigma_8(z=1) \simeq -5\% \; \text{to} \; -8\%
+   \]
+   consistent with the level required to relieve the \( S_8 \) tension without violating current RSD constraints.
+
+2. **Modified Gravity Signature**  
+   The effective late-time growth index satisfies:
+   \[
+   \gamma(z \to 0) \approx 0.63
+   \]
+   clearly deviating from the General Relativity prediction \( \gamma \approx 0.55 \).
+
+3. **Recovery of General Relativity**  
+   The screening mechanism ensures:
+   \[
+   G_{\mathrm{eff}}(z=0) \approx 1
+   \]
+   maintaining consistency with Solar System and local gravity tests.
 
 ---
 
-## 📄 License
+## ⚙️ Model Parameters (v1.1)
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+| Parameter | Symbol | Fiducial Value | Physical Role |
+|---------|--------|----------------|---------------|
+| Disformal coupling | \( \beta \) | **0.25** | Strength of late-time growth suppression |
+| Kinetic normalization | \( \alpha \) | 1.0 | Scalar kinetic scale |
+| Matter density | \( \Omega_{m0} \) | 0.31 | Planck-consistent background |
+| Amplitude | \( \sigma_{8,0} \) | 0.8 | Growth normalization |
+
+> **Note:** Earlier versions using approximate solvers required recalibration.  
+> Version **v1.1** uses a full second-order integration (`solve_ivp`), providing higher numerical fidelity.
+
+---
+
+## 🚀 Quick Start
+
+To reproduce the results and the main figure:
+
+```bash
+git clone https://github.com/heliossamuelhernandezreyes/Omega-CDM-A-Late-Time-Scalar-Tensor-Framework-for-Growth-Suppression
+cd Omega-CDM-A-Late-Time-Scalar-Tensor-Framework-for-Growth-Suppression
+pip install -r requirements.txt
+python Omega_solver.py
